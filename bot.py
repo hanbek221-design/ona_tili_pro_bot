@@ -1,7 +1,7 @@
 # bot.py
 from telebot import TeleBot, types
 
-TOKEN = "5197676792:AAHts6l5E59m4GS-xI-CJn8AKslH_17XhdE"  # o'zingizning tokeningizni qo'ying
+TOKEN = "5197676792:AAGtJYcNfjVF2gl9NHPc3TcYumEv-utkryM"  # o'zingizning tokeningizni qo'ying
 
 bot = TeleBot(TOKEN, parse_mode="HTML")
 
