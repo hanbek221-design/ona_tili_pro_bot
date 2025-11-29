@@ -1,0 +1,6 @@
+# .env faylni GitHubga chiqarmaslik
+.env
+
+# Python cache
+__pycache__/
+*.pyc
