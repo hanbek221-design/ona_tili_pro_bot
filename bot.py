@@ -1,7 +1,15 @@
 # bot.py
+import os
 from telebot import TeleBot, types
 
-TOKEN = "5197676792:AAGtJYcNfjVF2gl9NHPc3TcYumEv-utkryM"  # o'zingizning tokeningizni qo'ying
+# TOKENNI KODGA YOZMIYMIZ, ENV ORQALI OLAMIZ
+# GitHub / Render / boshqa serverlarda BOT_TOKEN degan environment variable o'rnatiladi
+TOKEN = os.getenv("BOT_TOKEN")
+
+if not TOKEN:
+    # Lokal ishlatayotganda .env dan yuklab olishingiz yoki vaqtincha bu yerga token qo'yishingiz mumkin,
+    # lekin GitHub'ga hech qachon real tokenni commit qilmang!
+    raise ValueError("BOT_TOKEN environment o'zgaruvchisi topilmadi. Iltimos, BOT_TOKEN ni o'rnating.")
 
 bot = TeleBot(TOKEN, parse_mode="HTML")
 
