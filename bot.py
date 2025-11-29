@@ -1,25 +1,23 @@
 # bot.py
-import os
 from telebot import TeleBot, types
 
-# TOKENNI KODGA YOZMIYMIZ, ENV ORQALI OLAMIZ
-TOKEN = os.getenv("BOT_TOKEN")  # Render'da BOT_TOKEN deb beramiz
-
-if not TOKEN:
-    raise ValueError("BOT_TOKEN environment o'zgaruvchisi topilmadi. Render'da BOT_TOKEN ni kiriting.")
+TOKEN = "5197676792:AAGtJYcNfjVF2gl9NHPc3TcYumEv-utkryM"  # o'zingizning tokeningizni qo'ying
 
 bot = TeleBot(TOKEN, parse_mode="HTML")
 
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    kb = types.ReplyKeyboardMarkup(
+        resize_keyboard=True      # tugmalar ekranga moslashadi
+        # one_time_keyboard=False # default o'zi False, klaviatura yashirilmaydi
+    )
 
-    # 1-qator: WebApp tugmasi – katta ko‘rinadi
+    # 1-qator: faqat WebApp tugmasi -> kattaroq ko'rinadi
     web_app_btn = types.KeyboardButton(
-        "📚💻 Ona tili Pro kursiga kirish",
+        "📚💻 Ona tili Pro kursiga  kirish ",
         web_app=types.WebAppInfo(
-            url="https://shahboz793.github.io/telegram/"  # sening web app sayting
+            url="https://shahboz793.github.io/telegram/"  # sizning saytingiz
         )
     )
     kb.add(web_app_btn)
@@ -29,14 +27,14 @@ def start(message):
     info_center = types.KeyboardButton("🏫 O‘quv markazi haqida")
     kb.add(info_courses, info_center)
 
-    # 3-qator: aloqa tugmasi
+    # 3-qator: bitta tugma
     contact_btn = types.KeyboardButton("📞 Admin bilan aloqa")
     kb.add(contact_btn)
 
     text = (
         "Assalomu alaykum!\n\n"
         "<b>Ona tili Pro</b> onlayn o‘quv kursi botiga xush kelibsiz. 👋\n\n"
-        "Pastdagi <b>“📚💻 Ona tili Pro kursiga kirish”</b> tugmasini bosing va kurslar platformasiga kiring.\n\n"
+        "Pastdagi <b>“📚💻 Ona tili Pro kursiga  kirish”</b> tugmasini bosing va kurslar platformasiga kiring.\n\n"
         "Qolgan tugmalar orqali esa kurslar va markaz haqida ma’lumot olishingiz mumkin."
     )
 
@@ -67,11 +65,12 @@ def menu_handler(message):
             "Admin: @onatili_premium\nSavollar, takliflar va hamkorlik uchun yozishingiz mumkin."
         )
 
-    elif txt == "📚💻 Ona tili Pro kursiga kirish":
+    elif txt == "📚💻 Ona tili Pro kursiga  kirish":
+        # WebApp tugmasi bosilganda Telegram o'zi saytingizni ochadi,
+        # shu sababli bu yerda alohida kod bo'lishi shart emas.
         bot.send_message(
             message.chat.id,
-            "Agar Web App ochilmagan bo‘lsa, yuqoridagi "
-            "'📚💻 Ona tili Pro kursiga kirish' tugmasini yana bir marta bosing."
+            "Agar Web App ochilmagan bo‘lsa, yuqoridagi '📚💻 Ona tili Pro kursiga  kirish' tugmasini yana bir marta bosing."
         )
 
     else:
@@ -83,4 +82,4 @@ def menu_handler(message):
 
 if __name__ == "__main__":
     print("Bot ishga tushdi...")
-    bot.infinity_polling(skip_pending=True)
+    bot.infinity_polling()
